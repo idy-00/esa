@@ -31,23 +31,23 @@ const stats = [
 const filieres = [
   {
     icon: Plane,
-    title: 'Transport Aérien',
-    desc: 'Opérations aériennes, exploitation et gestion des compagnies'
+    title: 'Transport Aérien & Aviation Civile',
+    desc: 'Technique des opérations aériennes et exploitation aéroportuaire'
   },
   {
     icon: Wrench,
     title: 'Maintenance Aéronautique',
-    desc: 'Technicien de maintenance avion et équipements aéroportuaires'
+    desc: 'Maintenance des aéronefs et équipements aéroportuaires'
   },
   {
     icon: Shield,
     title: 'Sécurité & Sûreté',
-    desc: 'Management de la sécurité et sûreté du transport aérien'
+    desc: 'Droit aérien, réglementation et législation aéronautique'
   },
   {
     icon: Briefcase,
-    title: 'Métiers Commerciaux',
-    desc: 'Distribution, service clients, tourisme et escale'
+    title: 'Management & Commercial',
+    desc: 'Exploitation des compagnies, distribution, service clients et tourisme'
   },
 ]
 
@@ -84,9 +84,9 @@ export default function Home() {
               École Supérieure<br />Aéronautique
             </motion.h1>
             <motion.p className="hero-subtitle" variants={fadeUp}>
-              Formez-vous aux métiers de l'aviation avec une école reconnue
-              en Afrique de l'Ouest et du Centre. Du BTS au Master,
-              devenez acteur du transport aérien.
+              École d'enseignement supérieur spécialisée dans la formation
+              et la recherche en transport aérien. Du BTS au Master,
+              devenez acteur de l'industrie aéronautique.
             </motion.p>
             <motion.div className="hero-actions" variants={fadeUp}>
               <Link to="/formations" className="btn btn-white">
@@ -212,16 +212,17 @@ export default function Home() {
             >
               <motion.h2 variants={fadeUp}>Pourquoi choisir l'ESA ?</motion.h2>
               <motion.p className="text-soft mb-3" variants={fadeUp}>
-                Une formation d'excellence reconnue par les professionnels du secteur aérien.
+                L'excellence et la diversité des compétences de nos enseignants nous offrent
+                un haut niveau d'expertise dans les domaines variés de l'industrie aéronautique.
               </motion.p>
               <motion.ul className="why-list" variants={stagger}>
                 {[
-                  'Autorisation N° 00000059/MEFPA/SG/DFPT du 28 janvier 2020',
-                  'Corps professoral expérimenté du secteur aérien',
-                  'Partenariats avec des compagnies et aéroports',
-                  'Formation pratique sur site aéroportuaire',
+                  'Référentiels OACI, IATA et normes IOSA',
+                  'Corps professoral d\'experts et professionnels de l\'aéronautique',
+                  'Formations répondant aux exigences de l\'industrie',
+                  'Programmes basés sur les standards internationaux',
                   'Vocation sous-régionale Afrique de l\'Ouest et du Centre',
-                  'Campus moderne à Dakar - Grand Yoff'
+                  'Campus à Dakar - HLM Grand Yoff Villa N° 723'
                 ].map((item, i) => (
                   <motion.li key={i} variants={fadeUp}>
                     <CheckCircle size={20} />

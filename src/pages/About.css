@@ -60,6 +60,31 @@
   }
 }
 
+/* About intro */
+.about-intro {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.lead-text {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+
+.lead-text.highlight {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--sky-800);
+  padding: 1.5rem 2rem;
+  background: var(--sky-50);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--sun);
+  text-align: left;
+}
+
 /* Mission */
 .mission-grid {
   display: grid;
@@ -99,6 +124,178 @@
   line-height: 1.7;
 }
 
+/* Missions content */
+.missions-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.mission-intro {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+/* Objectifs grid */
+.objectifs-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.objectif-item {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-100);
+  transition: all 0.2s ease;
+}
+
+.objectif-item:hover {
+  border-color: var(--sky-500);
+  box-shadow: var(--shadow-soft);
+}
+
+.objectif-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--sun);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.objectif-item p {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Formation grid */
+.formation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.formation-grid h2 {
+  margin-bottom: 1rem;
+}
+
+/* Valeurs grid - 5 colonnes */
+.valeurs-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.25rem;
+}
+
+.value-card {
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+}
+
+.value-icon {
+  color: var(--sun);
+  margin-bottom: 1rem;
+}
+
+.value-card h4 {
+  font-size: 0.9375rem;
+  margin-bottom: 0.5rem;
+}
+
+.value-card p {
+  font-size: 0.8125rem;
+}
+
+/* Expertise grid */
+.expertise-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.expertise-grid h2 {
+  margin-bottom: 1rem;
+}
+
+.corps-prof-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--sky-50);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--sky-100);
+  margin-top: 1rem;
+}
+
+.corps-prof-card svg {
+  color: var(--sky-700);
+  flex-shrink: 0;
+}
+
+.corps-prof-card p {
+  margin: 0;
+  color: var(--sky-800);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+/* Referentiels */
+.referentiels-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.ref-intro {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--text);
+  text-align: center;
+}
+
+.referentiels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.referentiel-card {
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.referentiel-card h4 {
+  color: var(--sky-700);
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Cibles grid */
+.cibles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.cible-card {
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.cible-icon {
+  color: var(--sun);
+  margin-bottom: 1rem;
+}
+
+.cible-card h4 {
+  margin-bottom: 0.5rem;
+}
+
 /* Community */
 .community-grid {
   display: grid;
@@ -133,71 +330,6 @@
   color: var(--white);
   font-weight: 600;
   font-size: 0.8125rem;
-}
-
-/* Values */
-.value-card {
-  padding: 2rem 1.5rem;
-  text-align: left;
-}
-
-.value-icon {
-  color: var(--sun);
-  margin-bottom: 1rem;
-}
-
-.value-card h4 {
-  margin-bottom: 0.5rem;
-}
-
-/* History grid */
-.history-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-}
-
-.history-card {
-  background: var(--white);
-  padding: 1.5rem;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--gray-100);
-  transition: all 0.2s ease;
-}
-
-.history-card:hover {
-  border-color: var(--sky-500);
-  box-shadow: var(--shadow);
-}
-
-.history-year {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--sun);
-  background: var(--sun-light);
-  padding: 0.25rem 0.625rem;
-  border-radius: 4px;
-  margin-bottom: 0.75rem;
-}
-
-.history-card p {
-  margin: 0;
-  font-size: 0.9375rem;
-  color: var(--text);
-  line-height: 1.5;
-}
-
-@media (max-width: 900px) {
-  .history-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .history-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* Events */
@@ -243,19 +375,21 @@
 /* Débouchés */
 .debouches-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem;
 }
 
 .debouche-card {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
   padding: 1.5rem;
 }
 
 .debouche-card svg {
   color: var(--sun);
-  flex-shrink: 0;
 }
 
 .debouche-card h4 {
@@ -276,16 +410,45 @@
 .cta h2 { color: var(--white); }
 .cta p { color: rgba(255, 255, 255, 0.8); }
 
+/* Utilities */
+.mt-6 {
+  margin-top: 4rem;
+}
+
 /* Responsive */
+@media (max-width: 1200px) {
+  .valeurs-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .cibles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .debouches-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @media (max-width: 1024px) {
   .community-grid { grid-template-columns: repeat(2, 1fr); }
+  .referentiels-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) {
+  .mission-grid { grid-template-columns: 1fr; }
+  .formation-grid { grid-template-columns: 1fr; }
+  .expertise-grid { grid-template-columns: 1fr; }
+  .valeurs-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
-  .mission-grid { grid-template-columns: 1fr; }
   .community-grid { grid-template-columns: 1fr; }
   .community-item img { height: 240px; }
-
   .events-grid { grid-template-columns: 1fr; }
+  .cibles-grid { grid-template-columns: 1fr; }
   .debouches-grid { grid-template-columns: 1fr; }
+  .valeurs-grid { grid-template-columns: 1fr; }
+
+  .lead-text.highlight {
+    padding: 1.25rem 1.5rem;
+  }
 }

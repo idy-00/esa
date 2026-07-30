@@ -176,8 +176,8 @@ export default function Formations() {
               Du BTS au Master,<br />votre parcours aviation
             </motion.h1>
             <motion.p className="hero-page-text" variants={fadeUp}>
-              Des programmes diplômants reconnus par l'État, conçus avec
-              les professionnels du secteur aérien.
+              Formation supérieure universitaire et professionnelle associant
+              le management et les techniques d'exploitation aéronautique.
             </motion.p>
           </motion.div>
         </div>
@@ -231,8 +231,8 @@ export default function Formations() {
             >
               <motion.h2 variants={fadeUp}>Formations Continues</motion.h2>
               <motion.p className="text-soft mb-3" variants={fadeUp}>
-                Des formations professionnelles pour les entreprises et les particuliers
-                souhaitant se spécialiser ou se perfectionner.
+                Des formations pour les entreprises et professionnels souhaitant
+                renforcer et mettre à niveau leurs capacités sur les systèmes de l'aviation.
               </motion.p>
               <motion.ul className="continues-list" variants={stagger}>
                 {formationsContinues.map((item, i) => (
@@ -333,9 +333,9 @@ export default function Formations() {
             viewport={{ once: true }}
             variants={fadeUp}
           >
-            <h2>Toutes nos Filières</h2>
+            <h2>Nos 12 Filières</h2>
             <p className="text-soft">
-              12 domaines de spécialisation pour votre carrière
+              Formation pluridisciplinaire dans les différentes filières du transport aérien
             </p>
           </motion.div>
 
