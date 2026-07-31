@@ -10,6 +10,19 @@ import airportWomen from '../assets/images/optimized/airport-women.webp'
 import airportMen from '../assets/images/optimized/airport-men.webp'
 import studentsKakemono from '../assets/images/optimized/students-kakemono.webp'
 import ceremonyAward from '../assets/images/optimized/ceremony-award.webp'
+
+import logoAfricaAir from '../assets/images/partenaires/africa-air-assistance.jpeg'
+import logoHeliconia from '../assets/images/partenaires/heliconia-senegal.jpeg'
+import logo2as from '../assets/images/partenaires/2as-technics.jpeg'
+import logoAdepme from '../assets/images/partenaires/adepme.jpeg'
+import logoLas from '../assets/images/partenaires/las.jpeg'
+import logoAibd from '../assets/images/partenaires/aibd-assistance.jpeg'
+import logoEcoleMil from '../assets/images/partenaires/ecole-militaire.jpeg'
+import logo3fpt from '../assets/images/partenaires/3fpt.jpeg'
+import logoArcEnCiel from '../assets/images/partenaires/arc-en-ciel.jpeg'
+import logoArmeeAir from '../assets/images/partenaires/armee-air.jpeg'
+import logoTogether from '../assets/images/partenaires/together-web.jpeg'
+
 import './Home.css'
 
 const fadeUp = {
@@ -25,7 +38,7 @@ const stats = [
   { value: '120+', label: 'Étudiants 2024/2025', icon: Users },
   { value: '2018', label: 'Année de création', icon: Award },
   { value: '12', label: 'Filières de formation', icon: GraduationCap },
-  { value: '6', label: 'Partenaires', icon: Building2 },
+  { value: '11', label: 'Partenaires', icon: Building2 },
 ]
 
 const filieres = [
@@ -52,12 +65,17 @@ const filieres = [
 ]
 
 const partenaires = [
-  'CNQP Dakar',
-  'CEDT Dakar',
-  'Lyon',
-  'Toulouse',
-  'ARC EN CIEL AIRLINES',
-  'Africa Air Assistance'
+  { name: 'Africa Air Assistance', logo: logoAfricaAir },
+  { name: 'Arc en Ciel Airlines', logo: logoArcEnCiel },
+  { name: 'Heliconia Senegal', logo: logoHeliconia },
+  { name: '2AS Technics', logo: logo2as },
+  { name: 'LAS', logo: logoLas },
+  { name: 'AIBD Assistance Services', logo: logoAibd },
+  { name: 'Armée de l\'Air Sénégal', logo: logoArmeeAir },
+  { name: 'École Militaire', logo: logoEcoleMil },
+  { name: '3FPT', logo: logo3fpt },
+  { name: 'ADEPME', logo: logoAdepme },
+  { name: 'Together Web Solutions', logo: logoTogether },
 ]
 
 export default function Home() {
@@ -298,15 +316,15 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            className="partenaires-grid mt-4"
+            className="partenaires-logos mt-4"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={stagger}
           >
             {partenaires.map((p, i) => (
-              <motion.div key={i} className="partenaire-item" variants={fadeUp}>
-                {p}
+              <motion.div key={i} className="partenaire-logo" variants={fadeUp}>
+                <img src={p.logo} alt={p.name} title={p.name} loading="lazy" />
               </motion.div>
             ))}
           </motion.div>

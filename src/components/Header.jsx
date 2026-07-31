@@ -9,6 +9,8 @@ const navItems = [
   { path: '/', label: 'Accueil' },
   { path: '/a-propos', label: 'À propos' },
   { path: '/formations', label: 'Formations' },
+  { path: '/actualites', label: 'Actualités' },
+  { path: '/vie-etudiante', label: 'Vie étudiante' },
   { path: '/contact', label: 'Contact' },
 ]
 
