@@ -44,15 +44,20 @@ export default function Footer() {
             <ul>
               <li>
                 <MapPin size={18} />
-                <span>HLM Grand Yoff, Villa N° 723<br />BP: 13952 – CP 11500, Dakar</span>
+                <a href="https://maps.google.com/?q=HLM+Grand+Yoff+Villa+723+Dakar" target="_blank" rel="noopener noreferrer">
+                  HLM Grand Yoff, Villa N° 723<br />BP: 13952 – CP 11500, Dakar
+                </a>
               </li>
               <li>
                 <Phone size={18} />
-                <span>+221 33 858 00 04<br />+221 77 726 12 33</span>
+                <span>
+                  <a href="tel:+221338580004">+221 33 858 00 04</a><br />
+                  <a href="tel:+221777261233">+221 77 726 12 33</a>
+                </span>
               </li>
               <li>
                 <Mail size={18} />
-                <span>contact@esa.sn</span>
+                <a href="mailto:contact@esa.sn">contact@esa.sn</a>
               </li>
               <li>
                 <Clock size={18} />
