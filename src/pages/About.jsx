@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom'
 import {
   Target, Eye, Users, Award, Building2, Globe,
   TrendingUp, BookOpen, ArrowRight, Star, Heart, Handshake,
-  GraduationCap, UserCheck, Briefcase, Plane
+  GraduationCap, UserCheck, Briefcase, Plane, Quote
 } from 'lucide-react'
+import SEOMeta from '../seo/SEOMeta'
+import { breadcrumbSchema } from '../seo/schemas'
 import groupWomen from '../assets/images/optimized/group-women.webp'
 import groupMen from '../assets/images/optimized/group-men.webp'
 import classroomTeacher from '../assets/images/optimized/classroom-teacher.webp'
@@ -84,6 +86,18 @@ const cibles = [
 export default function About() {
   return (
     <>
+      <SEOMeta
+        title="À Propos - École Supérieure Aéronautique"
+        description="Découvrez l'ESA : sa vision, ses missions, ses valeurs et son corps professoral d'experts aéronautiques. Première école d'aviation en Afrique de l'Ouest, basée à Dakar, Sénégal depuis 2018."
+        canonical="/a-propos"
+        schemas={[
+          breadcrumbSchema([
+            { name: 'Accueil', path: '/' },
+            { name: 'À Propos', path: '/a-propos' }
+          ])
+        ]}
+      />
+
       {/* Hero split */}
       <section className="hero-split">
         <div className="hero-split-content">
@@ -114,6 +128,113 @@ export default function About() {
         >
           <img src={classroomTeacher} alt="Cours à l'ESA" />
         </motion.div>
+      </section>
+
+      {/* Mot du Directeur Général */}
+      <section className="section section-dg">
+        <div className="container">
+          <motion.div
+            className="section-header center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            <h2>Mot du Directeur Général</h2>
+          </motion.div>
+
+          <motion.div
+            className="dg-message"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
+            <Quote size={48} className="dg-quote-icon" strokeWidth={1} />
+
+            <motion.p variants={fadeUp}>
+              L'aviation a toujours été une passion pour les professionnels de cet art mythique,
+              et continue de susciter la curiosité pour les non initiés.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              Longtemps considérée parmi l'un des plus grands enjeux économiques et technologiques
+              mondiaux, l'aviation reste une activité à la fois complexe et souvent perçue comme
+              un domaine réservé à l'élite scientifique.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              Les plus récentes prévisions de l'OACI et de l'IATA et confirmées par la Banque
+              mondiale et le FMI montrent que l'Afrique est la région mondiale qui a connu la
+              plus forte croissance de son trafic aérien. Le transport aérien devrait donc jouer
+              un rôle important dans le développement économique en Afrique.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              De l'avis des observateurs de l'industrie aéronautique, le secteur aérien africain
+              aura besoin d'ici 2035 de ressources humaines adéquatement formées pour préparer
+              la relève en personnels techniques dans les administrations de l'aviation, les
+              aéroports, les compagnies aériennes, les organismes de services aériens, etc.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              Pour relever ce défi, l'École Supérieure Aéronautique compte développer des formations
+              qualifiantes dans des filières spécialisées du système de l'aviation comme le management,
+              l'exploitation, la maintenance, la vente et la distribution, afin de mieux répondre aux
+              besoins de qualification et de renforcement de capacités des futurs cadres africains
+              du transport aérien.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              À ce titre, nous nous fixons comme objectif majeur d'apporter pleinement notre expertise
+              dans la définition des bases et fondamentaux au développement de l'industrie du transport aérien.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              Les missions de l'École Supérieure Aéronautique s'inscrivent dans l'innovation et la
+              dynamique de création de pôles de compétences pluridisciplinaires dans des domaines
+              variés de l'aviation, et pour donner une réponse positive face à l'insuffisance remarquée
+              d'organismes de formations spécialisés en transport aérien.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              L'École Supérieure Aéronautique vise à doter le secteur des transports aériens au Sénégal
+              et en Afrique, de solides potentialités en ressources humaines formées aux nouvelles
+              exigences en matière de management et d'exploitation technique des aéronefs et des
+              aéroports, de législation aéronautique.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              La formation de haut niveau et la qualification des personnels de l'aviation est notre
+              priorité dans un contexte commercial concurrentiel et technologique exigeant par les
+              effets d'une réglementation aéronautique en perpétuelle évolution et de plus en plus rigoureuse.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              Notre ambition est de rester un partenaire réactif de l'industrie du transport aérien
+              et ainsi de participer activement à la promotion de l'aviation au Sénégal et en Afrique
+              dans la poursuite de l'excellence ; en d'autres termes, de préparer les acteurs du
+              transport aérien du Sénégal et de la sous-région aux exigences de compétitivité dans
+              un monde globalisant.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              C'est pour l'École Supérieure Aéronautique une occasion d'offrir aux jeunes étudiants
+              et futurs cadres des opportunités riches en projets de spécialisation dans un domaine
+              aéronautique de leur choix.
+            </motion.p>
+
+            <motion.p variants={fadeUp}>
+              Nos étudiants pourront, grâce à l'expérience et l'expertise de nos intervenants, disposer
+              de formations diplômantes et qualifiantes de haut niveau dans un domaine des métiers aériens.
+            </motion.p>
+
+            <motion.div className="dg-signature" variants={fadeUp}>
+              <strong>Tahir NDIAYE</strong>
+              <span>Directeur Général</span>
+            </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Qui sommes-nous détaillé */}
