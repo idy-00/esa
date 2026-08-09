@@ -230,7 +230,7 @@ export default function About() {
             </motion.p>
 
             <motion.div className="dg-signature" variants={fadeUp}>
-              <strong>Tahir NDIAYE</strong>
+              <strong>Mamadou PADANE</strong>
               <span>Directeur Général</span>
             </motion.div>
           </motion.div>
