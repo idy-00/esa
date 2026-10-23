@@ -4,6 +4,8 @@ import {
   Plane, GraduationCap, Users, Building2, Award,
   Shield, Wrench, Briefcase, ArrowRight, CheckCircle
 } from 'lucide-react'
+import SEOMeta from '../seo/SEOMeta'
+import { breadcrumbSchema } from '../seo/schemas'
 import heroImage from '../assets/images/optimized/hero-classroom.webp'
 import heroMobile from '../assets/images/optimized/hero-classroom-mobile.webp'
 import airportWomen from '../assets/images/optimized/airport-women.webp'
@@ -81,6 +83,15 @@ const partenaires = [
 export default function Home() {
   return (
     <>
+      <SEOMeta
+        title="École Supérieure Aéronautique | Formation Aviation Dakar Sénégal"
+        description="L'ESA est l'école de référence en formation aéronautique en Afrique de l'Ouest. BTS Transport Aérien, Licence Professionnelle, Master Aviation à Dakar, Sénégal. Inscriptions ouvertes."
+        canonical="/"
+        schemas={[
+          breadcrumbSchema([{ name: 'Accueil', path: '/' }])
+        ]}
+      />
+
       {/* Hero */}
       <section className="hero">
         <picture className="hero-bg">

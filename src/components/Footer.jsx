@@ -52,7 +52,8 @@ export default function Footer() {
                 <Phone size={18} />
                 <span>
                   <a href="tel:+221338580004">+221 33 858 00 04</a><br />
-                  <a href="tel:+221777261233">+221 77 726 12 33</a>
+                  <a href="tel:+221777261233">+221 77 726 12 33</a><br />
+                  <a href="tel:+221764757615">+221 76 475 76 15</a>
                 </span>
               </li>
               <li>

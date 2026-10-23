@@ -525,3 +525,115 @@
     padding: 1.25rem 1.5rem;
   }
 }
+
+/* Brochure images */
+.brochure-images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.brochure-page {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: all 0.3s var(--ease);
+}
+
+.brochure-page:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.brochure-page img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .brochure-images {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+}
+
+/* Brochure download */
+.brochure-download {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.brochure-download .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Video Presentation Section */
+.section-video {
+  background: linear-gradient(180deg, var(--white) 0%, var(--sky-50) 100%);
+}
+
+.video-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(12, 25, 41, 0.15);
+  background: var(--sky-900);
+}
+
+.video-container video {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.video-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sun) 0%, #e6a800 100%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s var(--ease);
+  box-shadow: 0 8px 30px rgba(255, 186, 0, 0.4);
+}
+
+.video-play-btn:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 12px 40px rgba(255, 186, 0, 0.5);
+}
+
+.video-play-btn svg {
+  margin-left: 4px;
+}
+
+@media (max-width: 768px) {
+  .video-play-btn {
+    width: 70px;
+    height: 70px;
+  }
+
+  .video-play-btn svg {
+    width: 36px;
+    height: 36px;
+  }
+}

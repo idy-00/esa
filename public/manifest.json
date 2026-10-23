@@ -1,0 +1,22 @@
+{
+  "name": "ESA - École Supérieure Aéronautique",
+  "short_name": "ESA",
+  "description": "École Supérieure Aéronautique - Formation aux métiers du transport aérien au Sénégal. BTS, Licence Pro, Master à Dakar.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#003366",
+  "lang": "fr",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education"],
+  "scope": "/",
+  "dir": "ltr"
+}

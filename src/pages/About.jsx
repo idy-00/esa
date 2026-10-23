@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import {
   Target, Eye, Users, Award, Building2, Globe,
   TrendingUp, BookOpen, ArrowRight, Star, Heart, Handshake,
-  GraduationCap, UserCheck, Briefcase, Plane, Quote
+  GraduationCap, UserCheck, Briefcase, Plane, Quote, Download, Play
 } from 'lucide-react'
+import { useState, useRef } from 'react'
 import SEOMeta from '../seo/SEOMeta'
 import { breadcrumbSchema } from '../seo/schemas'
 import groupWomen from '../assets/images/optimized/group-women.webp'
@@ -82,6 +83,71 @@ const cibles = [
     desc: 'Transport aérien et sociétés de consignation et de transit des marchandises, fourniture de services aériens.'
   },
 ]
+
+
+function VideoPresentation() {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const videoRef = useRef(null)
+
+  const handlePlayClick = () => {
+    if (videoRef.current) {
+      videoRef.current.play()
+      setIsPlaying(true)
+    }
+  }
+
+  return (
+    <section className="section section-video">
+      <div className="container">
+        <motion.div
+          className="section-header center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+        >
+          <h2>Découvrez l'ESA en Vidéo</h2>
+          <p className="text-soft">
+            Une immersion au cœur de notre école et de nos formations
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="video-wrapper mt-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+        >
+          <div className="video-container">
+            <video
+              ref={videoRef}
+              poster="/video-poster-esa.jpg"
+              preload="none"
+              controls={isPlaying}
+              playsInline
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+              onEnded={() => setIsPlaying(false)}
+            >
+              <source src="/video-presentation-esa.mp4" type="video/mp4" />
+              Votre navigateur ne supporte pas la lecture vidéo.
+            </video>
+            {!isPlaying && (
+              <button
+                className="video-play-btn"
+                onClick={handlePlayClick}
+                aria-label="Lire la vidéo"
+              >
+                <Play size={48} fill="white" />
+              </button>
+            )}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
 
 export default function About() {
   return (
@@ -236,6 +302,9 @@ export default function About() {
           </motion.div>
         </div>
       </section>
+
+      {/* Vidéo de Présentation */}
+      <VideoPresentation />
 
       {/* Qui sommes-nous détaillé */}
       <section className="section">
@@ -726,6 +795,52 @@ export default function About() {
                 </div>
               </motion.div>
             ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Brochure de présentation ESA 2026 */}
+      <section className="section section-gray">
+        <div className="container">
+          <motion.div
+            className="section-header center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            <h2>Brochure de Présentation ESA 2026</h2>
+            <p className="text-soft">
+              Découvrez notre école et nos partenaires
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="brochure-images mt-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={stagger}
+          >
+            <motion.div className="brochure-page" variants={fadeUp}>
+              <img src="/brochure-page-1.png" alt="Brochure ESA 2026 - Couverture" loading="lazy" />
+            </motion.div>
+            <motion.div className="brochure-page" variants={fadeUp}>
+              <img src="/brochure-page-2.png" alt="Brochure ESA 2026 - Présentation" loading="lazy" />
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            className="brochure-download mt-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+          >
+            <a href="/brochure-esa-2026.pdf" download className="btn btn-primary">
+              <Download size={18} />
+              Télécharger la brochure PDF
+            </a>
           </motion.div>
         </div>
       </section>

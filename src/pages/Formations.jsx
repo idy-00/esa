@@ -5,6 +5,8 @@ import {
   GraduationCap, BookOpen, Award, Clock,
   ChevronDown, ArrowRight, CheckCircle
 } from 'lucide-react'
+import SEOMeta from '../seo/SEOMeta'
+import { coursesSchema, breadcrumbSchema } from '../seo/schemas'
 import maintenancePractice from '../assets/images/optimized/maintenance-practice.webp'
 import securityPractice from '../assets/images/optimized/security-practice.webp'
 import managementHangar from '../assets/images/optimized/management-hangar.webp'
@@ -161,6 +163,19 @@ export default function Formations() {
 
   return (
     <>
+      <SEOMeta
+        title="Formations Aéronautiques - BTS, Licence, Master Transport Aérien"
+        description="Formations en transport aérien à l'ESA Dakar : BTS Transport Aérien, Licence Professionnelle Aviation, Master Exploitation Aéroportuaire. 12 filières, programmes aux standards OACI et IATA."
+        canonical="/formations"
+        schemas={[
+          coursesSchema,
+          breadcrumbSchema([
+            { name: 'Accueil', path: '/' },
+            { name: 'Formations', path: '/formations' }
+          ])
+        ]}
+      />
+
       {/* Hero fullscreen */}
       <section className="hero-page">
         <img src={groupMen} alt="Étudiants ESA" className="hero-page-bg" />

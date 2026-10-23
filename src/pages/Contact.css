@@ -221,3 +221,11 @@
   .form-row { grid-template-columns: 1fr; }
   .contact-form-wrapper { padding: 1.5rem; }
 }
+.contact-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}

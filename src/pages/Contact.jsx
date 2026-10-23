@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   MapPin, Phone, Mail, Clock, Send, CheckCircle
 } from 'lucide-react'
+import SEOMeta from '../seo/SEOMeta'
+import { breadcrumbSchema } from '../seo/schemas'
 import './Contact.css'
 
 const fadeUp = {
@@ -23,7 +25,7 @@ const contactInfo = [
   {
     icon: Phone,
     title: 'Téléphone',
-    lines: ['+221 33 858 00 04', '+221 77 726 12 33']
+    lines: ['+221 33 858 00 04', '+221 77 726 12 33', '+221 76 475 76 15']
   },
   {
     icon: Mail,
@@ -38,27 +40,67 @@ const contactInfo = [
 ]
 
 export default function Contact() {
+  const formStartedAt = useRef(Math.floor(Date.now() / 1000))
   const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
     email: '',
     telephone: '',
     formation: '',
-    message: ''
+    message: '',
+    website: ''
   })
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setSubmitted(true)
+    setLoading(true)
+    setError('')
+
+    try {
+      const response = await fetch('/api/contact.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          form_started_at: formStartedAt.current
+        })
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        setSubmitted(true)
+      } else {
+        setError(result.message || 'Une erreur est survenue. Veuillez réessayer.')
+      }
+    } catch (err) {
+      setError('Erreur de connexion. Veuillez réessayer.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
     <>
+      <SEOMeta
+        title="Contact et Inscription - ESA Dakar"
+        description="Contactez l'École Supérieure Aéronautique à Dakar : inscription aux formations, demande d'information. HLM Grand Yoff, Villa N° 723 — Tél: +221 33 858 00 04 — contact@esa.sn"
+        canonical="/contact"
+        schemas={[
+          breadcrumbSchema([
+            { name: 'Accueil', path: '/' },
+            { name: 'Contact', path: '/contact' }
+          ])
+        ]}
+      />
+
       {/* Hero simple */}
       <section className="hero-simple">
         <div className="container">
@@ -135,8 +177,9 @@ export default function Contact() {
                       setSubmitted(false)
                       setFormData({
                         nom: '', prenom: '', email: '',
-                        telephone: '', formation: '', message: ''
+                        telephone: '', formation: '', message: '', website: ''
                       })
+                      formStartedAt.current = Math.floor(Date.now() / 1000)
                     }}
                   >
                     Envoyer un autre message
@@ -227,11 +270,37 @@ export default function Contact() {
                         required
                         placeholder="Décrivez votre demande..."
                       />
+
+                    {/* Invisible to visitors; automated form-fillers often populate it. */}
+                    <div className="contact-honeypot" aria-hidden="true">
+                      <label htmlFor="website">Site web</label>
+                      <input
+                        type="text"
+                        id="website"
+                        name="website"
+                        value={formData.website}
+                        onChange={handleChange}
+                        tabIndex="-1"
+                        autoComplete="off"
+                      />
+                    </div>
                     </div>
 
-                    <button type="submit" className="btn btn-primary btn-block">
-                      <Send size={18} />
-                      Envoyer le message
+                    {error && (
+                      <div className="form-error" style={{ color: '#dc3545', marginBottom: '1rem', padding: '0.75rem', background: '#f8d7da', borderRadius: '4px' }}>
+                        {error}
+                      </div>
+                    )}
+
+                    <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
+                      {loading ? (
+                        <>Envoi en cours...</>
+                      ) : (
+                        <>
+                          <Send size={18} />
+                          Envoyer le message
+                        </>
+                      )}
                     </button>
                   </form>
                 </>
