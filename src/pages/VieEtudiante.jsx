@@ -1,22 +1,12 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Users, Heart, Plane, Camera, ArrowRight, X } from 'lucide-react'
-
-import hangarGroupe from '../assets/images/immersion/hangar-groupe.jpeg'
-import maintenanceAvion from '../assets/images/immersion/maintenance-avion.jpeg'
-import visiteAvion from '../assets/images/immersion/visite-avion.jpeg'
-import aeroportDeparts from '../assets/images/immersion/aeroport-departs.jpeg'
-import cockpit from '../assets/images/immersion/cockpit.jpeg'
-import aibdHall from '../assets/images/immersion/aibd-hall.jpeg'
-import hangarMarche from '../assets/images/immersion/hangar-marche.jpeg'
-
-import groupWomen from '../assets/images/optimized/group-women.webp'
-import groupMen from '../assets/images/optimized/group-men.webp'
-import ceremonyAward from '../assets/images/optimized/ceremony-award.webp'
-import studentsKakemono from '../assets/images/optimized/students-kakemono.webp'
-import airportWomen from '../assets/images/optimized/airport-women.webp'
-import airportMen from '../assets/images/optimized/airport-men.webp'
+import { Users, Heart, Plane, Camera, ArrowRight } from 'lucide-react'
+import SEOMeta from '../seo/SEOMeta'
+import { breadcrumbSchema } from '../seo/schemas'
+import PhotoViewer from '../components/PhotoViewer'
+import PageLoader from '../components/PageLoader'
+import { useSiteContent, isPublished, paragraphs } from '../content/siteContent'
 
 import './VieEtudiante.css'
 
@@ -29,40 +19,79 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.1 } }
 }
 
-const immersionPhotos = [
-  { src: aibdHall, alt: 'Étudiants dans le hall de l\'aéroport AIBD' },
-  { src: aeroportDeparts, alt: 'Étudiants devant les départs' },
-  { src: hangarGroupe, alt: 'Groupe d\'étudiants dans le hangar' },
-  { src: hangarMarche, alt: 'Étudiants visitant le hangar' },
-  { src: visiteAvion, alt: 'Visite d\'un avion' },
-  { src: cockpit, alt: 'Découverte du cockpit' },
-  { src: maintenanceAvion, alt: 'Pratique maintenance avion' },
-]
+function Album({ album, gray, onOpen }) {
+  const mosaic = album.layout === 'mosaic'
+  return (
+    <section className={`section ${gray ? 'section-gray' : ''}`}>
+      <div className="container">
+        <motion.div
+          className="section-header center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeUp}
+        >
+          <h2>{album.title}</h2>
+          {album.subtitle && <p className="text-soft">{album.subtitle}</p>}
+        </motion.div>
 
-const galeriePhotos = [
-  { src: groupWomen, alt: 'Étudiantes ESA' },
-  { src: groupMen, alt: 'Étudiants ESA' },
-  { src: studentsKakemono, alt: 'Étudiants devant kakémono' },
-  { src: airportWomen, alt: 'Visite aéroport - étudiantes' },
-  { src: airportMen, alt: 'Visite aéroport - étudiants' },
-  { src: ceremonyAward, alt: 'Cérémonie de remise de prix' },
-  ...immersionPhotos,
-]
+        <motion.div
+          className={`${mosaic ? 'immersion-gallery' : 'galerie-grid'} mt-4`}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={stagger}
+        >
+          {album.photos.map((photo, i) => (
+            <motion.button
+              key={photo.src + i}
+              className={mosaic ? `immersion-item ${i === 0 ? 'immersion-large' : ''}` : 'galerie-item'}
+              variants={fadeUp}
+              onClick={() => onOpen(album, i)}
+              aria-label={photo.alt || `${album.title} - photo ${i + 1}`}
+            >
+              <img src={photo.src} alt={photo.alt} loading="lazy" />
+              <div className={mosaic ? 'immersion-overlay' : 'galerie-overlay'}>
+                <Camera size={mosaic ? 24 : 20} />
+              </div>
+            </motion.button>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
 
 export default function VieEtudiante() {
-  const [lightboxOpen, setLightboxOpen] = useState(false)
-  const [currentPhoto, setCurrentPhoto] = useState(0)
+  const content = useSiteContent()
+  const [viewer, setViewer] = useState(null)
 
-  const openLightbox = (index) => {
-    setCurrentPhoto(index)
-    setLightboxOpen(true)
-  }
+  const seo = (
+    <SEOMeta
+      title="Vie Étudiante - Campus et Activités ESA"
+      description="Découvrez la vie étudiante à l'ESA : Amicale des Étudiants, immersions professionnelles à l'aéroport AIBD, visites de hangars, galerie photos. Une communauté dynamique à Dakar, Sénégal."
+      canonical="/vie-etudiante"
+      schemas={[
+        breadcrumbSchema([
+          { name: 'Accueil', path: '/' },
+          { name: 'Vie Étudiante', path: '/vie-etudiante' }
+        ])
+      ]}
+    />
+  )
+
+  if (!content) return <>{seo}<PageLoader /></>
+
+  const page = content.vieEtudiante
+  const albums = page.albums.filter((a) => isPublished(a) && a.photos.length > 0)
 
   return (
     <>
+      {seo}
+
       {/* Hero */}
       <section className="hero-page">
-        <img src={ceremonyAward} alt="Vie étudiante ESA" className="hero-page-bg" />
+        {page.hero.image && <img src={page.hero.image} alt="" className="hero-page-bg" />}
         <div className="hero-page-overlay" />
         <div className="container hero-page-content">
           <motion.div
@@ -70,14 +99,11 @@ export default function VieEtudiante() {
             animate="visible"
             variants={stagger}
           >
-            <motion.span className="hero-eyebrow" variants={fadeUp}>Vie étudiante</motion.span>
+            {page.hero.eyebrow && <motion.span className="hero-eyebrow" variants={fadeUp}>{page.hero.eyebrow}</motion.span>}
             <motion.h1 variants={fadeUp}>
-              Une communauté<br />dynamique et solidaire
+              {page.hero.title}
             </motion.h1>
-            <motion.p className="hero-page-text" variants={fadeUp}>
-              Découvrez l'environnement épanouissant et les activités
-              qui rythment le quotidien de nos étudiants.
-            </motion.p>
+            {page.hero.text && <motion.p className="hero-page-text" variants={fadeUp}>{page.hero.text}</motion.p>}
           </motion.div>
         </div>
       </section>
@@ -93,18 +119,10 @@ export default function VieEtudiante() {
               viewport={{ once: true }}
               variants={stagger}
             >
-              <motion.h2 variants={fadeUp}>L'Amicale des Étudiants</motion.h2>
-              <motion.p className="amicale-text" variants={fadeUp}>
-                L'Amicale des étudiants de l'ESA a été créée pour le renforcement
-                des liens fraternels et relationnels dans un environnement de travail
-                avec un même objectif de travail et de réussite.
-              </motion.p>
-              <motion.p className="amicale-text" variants={fadeUp}>
-                Avec ses différents programmes socio-éducatifs, elle offre un cadre
-                à la fois studieux et jovial de communion et de solidarité propice
-                à l'épanouissement de nos étudiants au sein du campus mais également
-                à l'extérieur.
-              </motion.p>
+              <motion.h2 variants={fadeUp}>{page.amicale.title}</motion.h2>
+              {paragraphs(page.amicale.text).map((p, i) => (
+                <motion.p key={i} className="amicale-text" variants={fadeUp}>{p}</motion.p>
+              ))}
               <motion.div className="amicale-features" variants={stagger}>
                 <motion.div className="feature-item" variants={fadeUp}>
                   <Users size={24} />
@@ -120,98 +138,30 @@ export default function VieEtudiante() {
                 </motion.div>
               </motion.div>
             </motion.div>
-            <motion.div
-              className="amicale-image"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <img src={studentsKakemono} alt="Étudiants ESA" />
-            </motion.div>
+            {page.amicale.image && (
+              <motion.div
+                className="amicale-image"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <img src={page.amicale.image} alt={page.amicale.title} />
+              </motion.div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Immersion Professionnelle */}
-      <section className="section section-gray">
-        <div className="container">
-          <motion.div
-            className="section-header center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <h2>Immersion Professionnelle</h2>
-            <p className="text-soft">
-              Nos étudiants découvrent le terrain : aéroport AIBD, hangars, avions
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="immersion-gallery mt-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {immersionPhotos.map((photo, i) => (
-              <motion.div
-                key={i}
-                className={`immersion-item ${i === 0 ? 'immersion-large' : ''}`}
-                variants={fadeUp}
-                onClick={() => openLightbox(i + 6)}
-              >
-                <img src={photo.src} alt={photo.alt} loading="lazy" />
-                <div className="immersion-overlay">
-                  <Camera size={24} />
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Galerie Photos & Vidéos */}
-      <section className="section">
-        <div className="container">
-          <motion.div
-            className="section-header center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <h2>Galerie Photos</h2>
-            <p className="text-soft">
-              Les moments forts de la vie à l'ESA
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="galerie-grid mt-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {galeriePhotos.map((photo, i) => (
-              <motion.div
-                key={i}
-                className="galerie-item"
-                variants={fadeUp}
-                onClick={() => openLightbox(i)}
-              >
-                <img src={photo.src} alt={photo.alt} loading="lazy" />
-                <div className="galerie-overlay">
-                  <Camera size={20} />
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      {/* Albums photos */}
+      {albums.map((album, i) => (
+        <Album
+          key={album.id}
+          album={album}
+          gray={i % 2 === 0}
+          onOpen={(a, index) => setViewer({ title: a.title, photos: a.photos, index })}
+        />
+      ))}
 
       {/* CTA */}
       <section className="cta">
@@ -238,14 +188,13 @@ export default function VieEtudiante() {
         </div>
       </section>
 
-      {/* Lightbox */}
-      {lightboxOpen && (
-        <div className="lightbox" onClick={() => setLightboxOpen(false)}>
-          <button className="lightbox-close" onClick={() => setLightboxOpen(false)}>
-            <X size={32} />
-          </button>
-          <img src={galeriePhotos[currentPhoto].src} alt={galeriePhotos[currentPhoto].alt} />
-        </div>
+      {viewer && (
+        <PhotoViewer
+          title={viewer.title}
+          photos={viewer.photos}
+          startIndex={viewer.index}
+          onClose={() => setViewer(null)}
+        />
       )}
     </>
   )

@@ -1,0 +1,366 @@
+{
+  "actualites": {
+    "hero": {
+      "eyebrow": "Actualités",
+      "title": "La vie à l’ESA",
+      "text": "Découvrez les événements, cérémonies et moments forts qui rythment la vie de notre école."
+    },
+    "community": {
+      "title": "Notre Communauté",
+      "subtitle": "Une école dynamique avec des étudiants engagés et une équipe dévouée",
+      "photos": [
+        {
+          "src": "/media/photos/group-women.webp",
+          "alt": "Nos étudiantes"
+        },
+        {
+          "src": "/media/photos/group-men.webp",
+          "alt": "Nos étudiants"
+        }
+      ]
+    },
+    "eventsSection": {
+      "title": "Événements et Cérémonies",
+      "subtitle": "Des moments forts qui renforcent notre communauté"
+    },
+    "videos": [
+      {
+        "id": "interview-directeur",
+        "published": true,
+        "title": "Interview du Directeur",
+        "subtitle": "Pourquoi l’ESA a-t-elle été créée ?",
+        "description": "Le Directeur Général de l’École Supérieure Aéronautique explique la vision et les motivations derrière la création de l’ESA, première école privée aéronautique au Sénégal.",
+        "src": "/video-interview-directeur.mp4",
+        "poster": "/video-poster-esa.jpg",
+        "youtube": ""
+      }
+    ],
+    "events": [
+      {
+        "id": "soutenance-3eme-promotion",
+        "published": true,
+        "featured": true,
+        "date": "",
+        "location": "",
+        "title": "Cérémonie de Soutenance de la 3ème Promotion",
+        "summary": "Une nouvelle génération de talents prêts à briller",
+        "body": "L’École Supérieure Aéronautique (ESA) est fière de vous présenter la cérémonie de soutenance de sa 3ème promotion de Licence. Cet évènement a marqué l’aboutissement d’un parcours de formation exigeant et la naissance de nouveaux professionnels qualifiés en Sécurité et Sûreté Aéroportuaire, Technique de Maintenance Aéronautique et Exploitation du Transport Aérien. Découvrez les moments forts de cette journée mémorable.\n\nL’ESA a célébré la soutenance de sa 3ème promotion, un moment clé pour les étudiants ayant achevé leurs formations dans des domaines variés de l’aviation et porteurs. Cet évènement a permis de mettre en lumière les compétences acquises par les apprenants et leur préparation à intégrer le monde professionnel.",
+        "cover": "/media/soutenance-3eme/soutenance-02.webp",
+        "photos": [
+          {
+            "src": "/media/soutenance-3eme/soutenance-01.webp",
+            "alt": "Soutenance 3ème Promotion ESA 1"
+          },
+          {
+            "src": "/media/soutenance-3eme/soutenance-02.webp",
+            "alt": "Soutenance 3ème Promotion ESA 2"
+          },
+          {
+            "src": "/media/soutenance-3eme/soutenance-03.webp",
+            "alt": "Soutenance 3ème Promotion ESA 3"
+          },
+          {
+            "src": "/media/soutenance-3eme/soutenance-04.webp",
+            "alt": "Soutenance 3ème Promotion ESA 4"
+          },
+          {
+            "src": "/media/soutenance-3eme/soutenance-05.webp",
+            "alt": "Soutenance 3ème Promotion ESA 5"
+          },
+          {
+            "src": "/media/soutenance-3eme/soutenance-06.webp",
+            "alt": "Soutenance 3ème Promotion ESA 6"
+          },
+          {
+            "src": "/media/soutenance-3eme/soutenance-07.webp",
+            "alt": "Soutenance 3ème Promotion ESA 7"
+          },
+          {
+            "src": "/media/soutenance-3eme/soutenance-08.webp",
+            "alt": "Soutenance 3ème Promotion ESA 8"
+          }
+        ]
+      },
+      {
+        "id": "cocktail-convivial",
+        "published": true,
+        "featured": true,
+        "date": "",
+        "location": "",
+        "title": "Cocktail Convivial",
+        "summary": "Retrouvailles entre l’administration et le corps professoral",
+        "body": "Le cocktail convivial est traditionnellement organisé au sein de l’École Supérieure Aéronautique comme une occasion idéale de retrouvailles entre l’administration et le corps professoral pour échanger dans un cadre détendu et célébrer l’esprit d’entreprise et la bonne collaboration.",
+        "cover": "/media/cocktail/groupe-1.webp",
+        "photos": [
+          {
+            "src": "/media/cocktail/groupe-1.webp",
+            "alt": "Cocktail ESA 1"
+          },
+          {
+            "src": "/media/cocktail/groupe-2.webp",
+            "alt": "Cocktail ESA 2"
+          },
+          {
+            "src": "/media/cocktail/convivialite-1.webp",
+            "alt": "Cocktail ESA 3"
+          },
+          {
+            "src": "/media/cocktail/convivialite-2.webp",
+            "alt": "Cocktail ESA 4"
+          },
+          {
+            "src": "/media/cocktail/convivialite-3.webp",
+            "alt": "Cocktail ESA 5"
+          },
+          {
+            "src": "/media/cocktail/echange-1.webp",
+            "alt": "Cocktail ESA 6"
+          },
+          {
+            "src": "/media/cocktail/echange-2.webp",
+            "alt": "Cocktail ESA 7"
+          },
+          {
+            "src": "/media/cocktail/echange-3.webp",
+            "alt": "Cocktail ESA 8"
+          }
+        ]
+      },
+      {
+        "id": "72h-activites-socio-educatives",
+        "published": true,
+        "featured": false,
+        "date": "",
+        "location": "",
+        "title": "72H d’Activités Socio-Éducatives",
+        "summary": "L’Amicale des Étudiants organise des événements pour célébrer l’excellence",
+        "body": "",
+        "cover": "/media/72h-activites/72h-10.webp",
+        "photos": [
+          {
+            "src": "/media/72h-activites/72h-01.webp",
+            "alt": "72H d’activités ESA 1"
+          },
+          {
+            "src": "/media/72h-activites/72h-02.webp",
+            "alt": "72H d’activités ESA 2"
+          },
+          {
+            "src": "/media/72h-activites/72h-03.webp",
+            "alt": "72H d’activités ESA 3"
+          },
+          {
+            "src": "/media/72h-activites/72h-04.webp",
+            "alt": "72H d’activités ESA 4"
+          },
+          {
+            "src": "/media/72h-activites/72h-05.webp",
+            "alt": "72H d’activités ESA 5"
+          },
+          {
+            "src": "/media/72h-activites/72h-06.webp",
+            "alt": "72H d’activités ESA 6"
+          },
+          {
+            "src": "/media/72h-activites/72h-07.webp",
+            "alt": "72H d’activités ESA 7"
+          },
+          {
+            "src": "/media/72h-activites/72h-08.webp",
+            "alt": "72H d’activités ESA 8"
+          },
+          {
+            "src": "/media/72h-activites/72h-09.webp",
+            "alt": "72H d’activités ESA 9"
+          },
+          {
+            "src": "/media/72h-activites/72h-10.webp",
+            "alt": "72H d’activités ESA 10"
+          },
+          {
+            "src": "/media/72h-activites/72h-11.webp",
+            "alt": "72H d’activités ESA 11"
+          },
+          {
+            "src": "/media/72h-activites/72h-12.webp",
+            "alt": "72H d’activités ESA 12"
+          }
+        ]
+      },
+      {
+        "id": "reunion-agrement-bts",
+        "published": true,
+        "featured": false,
+        "date": "2025-06-01",
+        "location": "ESA, Dakar",
+        "title": "Réunion Agrément BTS",
+        "summary": "Réunion d’ouverture des travaux avec les experts du Ministère de la Formation Professionnelle et Technique.",
+        "body": "Réunion d’ouverture des travaux avec les experts du Ministère de la Formation Professionnelle et Technique tenue en juin 2025 dans les locaux de l’École Supérieure Aéronautique dans le cadre du processus d’agrément des programmes d’enseignement du BTS.",
+        "cover": "/media/reunion-bts/reunion-1.webp",
+        "photos": [
+          {
+            "src": "/media/reunion-bts/reunion-1.webp",
+            "alt": "Réunion agrément BTS 1"
+          },
+          {
+            "src": "/media/reunion-bts/reunion-2.webp",
+            "alt": "Réunion agrément BTS 2"
+          },
+          {
+            "src": "/media/reunion-bts/reunion-3.webp",
+            "alt": "Réunion agrément BTS 3"
+          },
+          {
+            "src": "/media/reunion-bts/reunion-4.webp",
+            "alt": "Réunion agrément BTS 4"
+          },
+          {
+            "src": "/media/reunion-bts/reunion-5.webp",
+            "alt": "Réunion agrément BTS 5"
+          },
+          {
+            "src": "/media/reunion-bts/reunion-6.webp",
+            "alt": "Réunion agrément BTS 6"
+          }
+        ]
+      },
+      {
+        "id": "reconnaissance-des-marraines",
+        "published": true,
+        "featured": false,
+        "date": "",
+        "location": "",
+        "title": "Reconnaissance des Marraines",
+        "summary": "Cérémonie de remerciement aux partenaires et soutiens de l’école",
+        "body": "",
+        "cover": "/media/photos/ceremony-gueye.webp",
+        "photos": []
+      },
+      {
+        "id": "prise-de-parole-etudiante",
+        "published": true,
+        "featured": false,
+        "date": "",
+        "location": "",
+        "title": "Prise de Parole Étudiante",
+        "summary": "Nos étudiants développent leur leadership lors des événements",
+        "body": "",
+        "cover": "/media/photos/event-speech.webp",
+        "photos": []
+      }
+    ]
+  },
+  "vieEtudiante": {
+    "hero": {
+      "eyebrow": "Vie étudiante",
+      "title": "Une communauté dynamique et solidaire",
+      "text": "Découvrez l’environnement épanouissant et les activités qui rythment le quotidien de nos étudiants.",
+      "image": "/media/photos/ceremony-award.webp"
+    },
+    "amicale": {
+      "title": "L’Amicale des Étudiants",
+      "text": "L’Amicale des étudiants de l’ESA a été créée pour le renforcement des liens fraternels et relationnels dans un environnement de travail avec un même objectif de travail et de réussite.\n\nAvec ses différents programmes socio-éducatifs, elle offre un cadre à la fois studieux et jovial de communion et de solidarité propice à l’épanouissement de nos étudiants au sein du campus mais également à l’extérieur.",
+      "image": "/media/photos/students-kakemono.webp"
+    },
+    "albums": [
+      {
+        "id": "immersion-professionnelle",
+        "published": true,
+        "layout": "mosaic",
+        "title": "Immersion Professionnelle",
+        "subtitle": "Nos étudiants découvrent le terrain : aéroport AIBD, hangars, avions",
+        "photos": [
+          {
+            "src": "/media/immersion/aibd-hall.webp",
+            "alt": "Étudiants dans le hall de l’aéroport AIBD"
+          },
+          {
+            "src": "/media/immersion/aeroport-departs.webp",
+            "alt": "Étudiants devant les départs"
+          },
+          {
+            "src": "/media/immersion/hangar-groupe.webp",
+            "alt": "Groupe d’étudiants dans le hangar"
+          },
+          {
+            "src": "/media/immersion/hangar-marche.webp",
+            "alt": "Étudiants visitant le hangar"
+          },
+          {
+            "src": "/media/immersion/visite-avion.webp",
+            "alt": "Visite d’un avion"
+          },
+          {
+            "src": "/media/immersion/cockpit.webp",
+            "alt": "Découverte du cockpit"
+          },
+          {
+            "src": "/media/immersion/maintenance-avion.webp",
+            "alt": "Pratique maintenance avion"
+          }
+        ]
+      },
+      {
+        "id": "galerie-photos",
+        "published": true,
+        "layout": "grid",
+        "title": "Galerie Photos",
+        "subtitle": "Les moments forts de la vie à l’ESA",
+        "photos": [
+          {
+            "src": "/media/photos/group-women.webp",
+            "alt": "Étudiantes ESA"
+          },
+          {
+            "src": "/media/photos/group-men.webp",
+            "alt": "Étudiants ESA"
+          },
+          {
+            "src": "/media/photos/students-kakemono.webp",
+            "alt": "Étudiants devant kakémono"
+          },
+          {
+            "src": "/media/photos/airport-women.webp",
+            "alt": "Visite aéroport - étudiantes"
+          },
+          {
+            "src": "/media/photos/airport-men.webp",
+            "alt": "Visite aéroport - étudiants"
+          },
+          {
+            "src": "/media/photos/ceremony-award.webp",
+            "alt": "Cérémonie de remise de prix"
+          },
+          {
+            "src": "/media/immersion/aibd-hall.webp",
+            "alt": "Étudiants dans le hall de l’aéroport AIBD"
+          },
+          {
+            "src": "/media/immersion/aeroport-departs.webp",
+            "alt": "Étudiants devant les départs"
+          },
+          {
+            "src": "/media/immersion/hangar-groupe.webp",
+            "alt": "Groupe d’étudiants dans le hangar"
+          },
+          {
+            "src": "/media/immersion/hangar-marche.webp",
+            "alt": "Étudiants visitant le hangar"
+          },
+          {
+            "src": "/media/immersion/visite-avion.webp",
+            "alt": "Visite d’un avion"
+          },
+          {
+            "src": "/media/immersion/cockpit.webp",
+            "alt": "Découverte du cockpit"
+          },
+          {
+            "src": "/media/immersion/maintenance-avion.webp",
+            "alt": "Pratique maintenance avion"
+          }
+        ]
+      }
+    ]
+  }
+}

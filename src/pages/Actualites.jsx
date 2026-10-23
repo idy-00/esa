@@ -1,32 +1,12 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Calendar, Users, ArrowRight, Images, X } from 'lucide-react'
-
-import cocktailGroupe1 from '../assets/images/cocktail/groupe-1.jpeg'
-import cocktailGroupe2 from '../assets/images/cocktail/groupe-2.jpeg'
-import cocktailConviv1 from '../assets/images/cocktail/convivialite-1.jpeg'
-import cocktailConviv2 from '../assets/images/cocktail/convivialite-2.jpeg'
-import cocktailConviv3 from '../assets/images/cocktail/convivialite-3.jpeg'
-import cocktailEchange1 from '../assets/images/cocktail/echange-1.jpeg'
-import cocktailEchange2 from '../assets/images/cocktail/echange-2.jpeg'
-import cocktailEchange3 from '../assets/images/cocktail/echange-3.jpeg'
-
-import reunion1 from '../assets/images/reunion-bts/reunion-1.jpeg'
-import reunion2 from '../assets/images/reunion-bts/reunion-2.jpeg'
-import reunion3 from '../assets/images/reunion-bts/reunion-3.jpeg'
-import reunion4 from '../assets/images/reunion-bts/reunion-4.jpeg'
-import reunion5 from '../assets/images/reunion-bts/reunion-5.jpeg'
-import reunion6 from '../assets/images/reunion-bts/reunion-6.jpeg'
-
-import groupWomen from '../assets/images/optimized/group-women.webp'
-import groupMen from '../assets/images/optimized/group-men.webp'
-import eventSpeech from '../assets/images/optimized/event-speech.webp'
-import ceremonyGueye from '../assets/images/optimized/ceremony-gueye.webp'
-import ceremonyAward from '../assets/images/optimized/ceremony-award.webp'
-import h72Main from '../assets/images/72h-activites/72h-10.jpeg'
-
-const h72Photos = Object.values(import.meta.glob('../assets/images/72h-activites/*.jpeg', { eager: true, import: 'default' }))
+import { Calendar, MapPin, ArrowRight, Images } from 'lucide-react'
+import SEOMeta from '../seo/SEOMeta'
+import { breadcrumbSchema } from '../seo/schemas'
+import PhotoViewer from '../components/PhotoViewer'
+import PageLoader from '../components/PageLoader'
+import { useSiteContent, isPublished, isUpcoming, formatEventDate, paragraphs } from '../content/siteContent'
 
 import './Actualites.css'
 
@@ -39,77 +19,116 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.1 } }
 }
 
-const cocktailPhotos = [
-  cocktailGroupe1, cocktailGroupe2, cocktailConviv1,
-  cocktailConviv2, cocktailConviv3, cocktailEchange1,
-  cocktailEchange2, cocktailEchange3
-]
+const FEATURED_PREVIEW = 8
 
-const reunionPhotos = [
-  reunion1, reunion2, reunion3, reunion4, reunion5, reunion6
-]
+function SectionHeader({ title, subtitle }) {
+  return (
+    <motion.div
+      className="section-header center"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={fadeUp}
+    >
+      <h2>{title}</h2>
+      {subtitle && <p className="text-soft">{subtitle}</p>}
+    </motion.div>
+  )
+}
 
-const events = [
-  {
-    id: '72h',
-    image: h72Main,
-    title: '72H d\'Activités Socio-Éducatives',
-    desc: 'L\'Amicale des Étudiants organise des événements pour célébrer l\'excellence',
-    photos: h72Photos
-  },
-  {
-    id: 'reunion-bts',
-    image: reunion1,
-    title: 'Réunion Agrément BTS',
-    desc: 'Réunion d\'ouverture des travaux avec les experts du Ministère de la Formation Professionnelle et Technique tenue en juin 2025 dans les locaux de l\'École Supérieure Aéronautique dans le cadre du processus d\'agrément des programmes d\'enseignement du BTS.',
-    photos: reunionPhotos
-  },
-  {
-    id: 'marraines',
-    image: ceremonyGueye,
-    title: 'Reconnaissance des Marraines',
-    desc: 'Cérémonie de remerciement aux partenaires et soutiens de l\'école',
-    photos: []
-  },
-  {
-    id: 'discours',
-    image: eventSpeech,
-    title: 'Prise de Parole Étudiante',
-    desc: 'Nos étudiants développent leur leadership lors des événements',
-    photos: []
-  },
-]
+export function VideoBlock({ video }) {
+  return (
+    <motion.div
+      className="video-interview mt-4"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={fadeUp}
+    >
+      {video.youtube ? (
+        <div className="video-embed">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${video.youtube}`}
+            title={video.title}
+            loading="lazy"
+            allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      ) : (
+        <video controls preload="metadata" poster={video.poster || undefined} className="interview-video">
+          <source src={video.src} type={video.src.endsWith('.webm') ? 'video/webm' : 'video/mp4'} />
+          Votre navigateur ne supporte pas la lecture de vidéos.
+        </video>
+      )}
+      {video.description && (
+        <div className="interview-caption">
+          {paragraphs(video.description).map((p, i) => <p key={i}>{p}</p>)}
+        </div>
+      )}
+    </motion.div>
+  )
+}
+
+export function EventMeta({ event }) {
+  if (!event.date && !event.location) return null
+  return (
+    <div className="event-meta">
+      {event.date && <span><Calendar size={14} /> {formatEventDate(event.date, event.endDate)}</span>}
+      {event.location && <span><MapPin size={14} /> {event.location}</span>}
+    </div>
+  )
+}
+
+export function EventCard({ event }) {
+  const photoCount = event.photos.length
+  return (
+    <motion.div className="event-card" variants={fadeUp}>
+      <Link to={`/actualites/${event.id}`} className="event-card-link">
+        {event.cover && <img src={event.cover} alt={event.title} loading="lazy" />}
+        <div className="event-info">
+          <EventMeta event={event} />
+          <h4>{event.title}</h4>
+          {event.summary && <p>{event.summary}</p>}
+          <span className="gallery-btn">
+            {photoCount > 0 ? <><Images size={16} /> Voir les photos ({photoCount})</> : <>Lire la suite <ArrowRight size={14} /></>}
+          </span>
+        </div>
+      </Link>
+    </motion.div>
+  )
+}
 
 export default function Actualites() {
-  const [galleryOpen, setGalleryOpen] = useState(false)
-  const [currentEvent, setCurrentEvent] = useState(null)
-  const [currentPhoto, setCurrentPhoto] = useState(0)
+  const content = useSiteContent()
+  const [viewer, setViewer] = useState(null)
 
-  const openGallery = (event) => {
-    setCurrentEvent(event)
-    setCurrentPhoto(0)
-    setGalleryOpen(true)
-  }
+  const seo = (
+    <SEOMeta
+      title="Actualités - Événements et Vie de l'ESA"
+      description="Suivez l'actualité de l'École Supérieure Aéronautique : événements étudiants, cérémonies, 72H d'activités socio-éducatives, réunions d'agrément BTS. Vie dynamique du campus à Dakar."
+      canonical="/actualites"
+      schemas={[
+        breadcrumbSchema([
+          { name: 'Accueil', path: '/' },
+          { name: 'Actualités', path: '/actualites' }
+        ])
+      ]}
+    />
+  )
 
-  const closeGallery = () => {
-    setGalleryOpen(false)
-    setCurrentEvent(null)
-  }
+  if (!content) return <>{seo}<PageLoader /></>
 
-  const nextPhoto = () => {
-    if (currentEvent) {
-      setCurrentPhoto((prev) => (prev + 1) % currentEvent.photos.length)
-    }
-  }
-
-  const prevPhoto = () => {
-    if (currentEvent) {
-      setCurrentPhoto((prev) => (prev - 1 + currentEvent.photos.length) % currentEvent.photos.length)
-    }
-  }
+  const page = content.actualites
+  const events = page.events.filter(isPublished)
+  const upcoming = events.filter(isUpcoming).sort((a, b) => a.date.localeCompare(b.date))
+  const featured = events.filter((e) => e.featured && !isUpcoming(e))
+  const videos = page.videos.filter(isPublished)
 
   return (
     <>
+      {seo}
+
       {/* Hero */}
       <section className="hero-simple">
         <div className="container hero-simple-content">
@@ -118,144 +137,167 @@ export default function Actualites() {
             animate="visible"
             variants={stagger}
           >
-            <motion.span className="hero-eyebrow" variants={fadeUp}>Actualités</motion.span>
+            {page.hero.eyebrow && <motion.span className="hero-eyebrow" variants={fadeUp}>{page.hero.eyebrow}</motion.span>}
             <motion.h1 variants={fadeUp}>
-              La vie à l'ESA
+              {page.hero.title}
             </motion.h1>
-            <motion.p variants={fadeUp}>
-              Découvrez les événements, cérémonies et moments forts
-              qui rythment la vie de notre école.
-            </motion.p>
+            {page.hero.text && <motion.p variants={fadeUp}>{page.hero.text}</motion.p>}
           </motion.div>
         </div>
       </section>
+
+      {/* Événements à venir */}
+      {upcoming.length > 0 && (
+        <section className="section section-upcoming">
+          <div className="container">
+            <SectionHeader title="Événements à venir" subtitle="Ne manquez pas les prochains rendez-vous de l'ESA" />
+            <motion.div
+              className="upcoming-list mt-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={stagger}
+            >
+              {upcoming.map((event) => {
+                const d = new Date(`${event.date}T12:00:00`)
+                return (
+                  <motion.div key={event.id} variants={fadeUp}>
+                    <Link to={`/actualites/${event.id}`} className="upcoming-item">
+                      <div className="upcoming-date">
+                        <span className="upcoming-day">{d.getDate()}</span>
+                        <span className="upcoming-month">{d.toLocaleDateString('fr-FR', { month: 'short' })}</span>
+                      </div>
+                      <div className="upcoming-body">
+                        <h4>{event.title}</h4>
+                        <EventMeta event={event} />
+                        {event.summary && <p>{event.summary}</p>}
+                      </div>
+                      <ArrowRight size={20} className="upcoming-arrow" />
+                    </Link>
+                  </motion.div>
+                )
+              })}
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* Notre Communauté */}
-      <section className="section">
-        <div className="container">
-          <motion.div
-            className="section-header center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <h2>Notre Communauté</h2>
-            <p className="text-soft">
-              Une école dynamique avec des étudiants engagés et une équipe dévouée
-            </p>
-          </motion.div>
+      {page.community.photos.length > 0 && (
+        <section className="section">
+          <div className="container">
+            <SectionHeader title={page.community.title} subtitle={page.community.subtitle} />
 
-          <motion.div
-            className="community-grid mt-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            <motion.div className="community-item community-wide" variants={fadeUp}>
-              <img src={groupWomen} alt="Étudiantes ESA sur le campus" loading="lazy" />
-              <div className="community-label">Nos étudiantes</div>
+            <motion.div
+              className="community-grid mt-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={stagger}
+            >
+              {page.community.photos.map((photo, i) => (
+                <motion.div key={photo.src + i} className={`community-item ${i === 0 ? 'community-wide' : ''}`} variants={fadeUp}>
+                  <img src={photo.src} alt={photo.alt} loading="lazy" />
+                  {photo.alt && <div className="community-label">{photo.alt}</div>}
+                </motion.div>
+              ))}
             </motion.div>
-            <motion.div className="community-item" variants={fadeUp}>
-              <img src={groupMen} alt="Étudiants ESA sur le campus" loading="lazy" />
-              <div className="community-label">Nos étudiants</div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
-      {/* Cocktail Convivial */}
-      <section className="section section-gray">
-        <div className="container">
-          <motion.div
-            className="section-header center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <h2>Cocktail Convivial</h2>
-            <p className="text-soft">
-              Retrouvailles entre l'administration et le corps professoral
-            </p>
-          </motion.div>
+      {/* Vidéos */}
+      {videos.map((video) => (
+        <section key={video.id} className="section section-gray">
+          <div className="container">
+            <SectionHeader title={video.title} subtitle={video.subtitle} />
+            <VideoBlock video={video} />
+          </div>
+        </section>
+      ))}
 
-          <motion.div
-            className="cocktail-intro mt-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <p>
-              Le cocktail convivial est traditionnellement organisé au sein de l'École
-              Supérieure Aéronautique comme une occasion idéale de retrouvailles entre
-              l'administration et le corps professoral pour échanger dans un cadre
-              détendu et célébrer l'esprit d'entreprise et la bonne collaboration.
-            </p>
-          </motion.div>
+      {/* Événements mis en avant */}
+      {featured.map((event, n) => (
+        <section key={event.id} className={`section ${n % 2 === 0 ? 'section-gray' : ''}`}>
+          <div className="container">
+            <SectionHeader title={event.title} subtitle={event.summary} />
 
-          <motion.div
-            className="cocktail-gallery mt-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {cocktailPhotos.map((photo, i) => (
-              <motion.div key={i} className="gallery-item" variants={fadeUp}>
-                <img src={photo} alt={`Cocktail ESA ${i + 1}`} loading="lazy" />
+            {paragraphs(event.body).slice(0, 1).map((p, i) => (
+              <motion.div
+                key={i}
+                className="cocktail-intro mt-4"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+              >
+                <p>{p}</p>
               </motion.div>
             ))}
-          </motion.div>
-        </div>
-      </section>
+
+            {event.photos.length > 0 && (
+              <motion.div
+                className="cocktail-gallery mt-4"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={stagger}
+              >
+                {event.photos.slice(0, FEATURED_PREVIEW).map((photo, i) => (
+                  <motion.button
+                    key={photo.src + i}
+                    className="gallery-item"
+                    variants={fadeUp}
+                    onClick={() => setViewer({ title: event.title, photos: event.photos, index: i })}
+                  >
+                    <img src={photo.src} alt={photo.alt || `${event.title} ${i + 1}`} loading="lazy" />
+                  </motion.button>
+                ))}
+              </motion.div>
+            )}
+
+            {paragraphs(event.body).slice(1).map((p, i) => (
+              <motion.div
+                key={i}
+                className="cocktail-intro mt-4"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+              >
+                <p>{p}</p>
+              </motion.div>
+            ))}
+
+            <div className="featured-more mt-4">
+              <Link to={`/actualites/${event.id}`} className="gallery-btn">
+                {event.photos.length > FEATURED_PREVIEW
+                  ? <><Images size={16} /> Voir les {event.photos.length} photos</>
+                  : <>Voir l'événement <ArrowRight size={14} /></>}
+              </Link>
+            </div>
+          </div>
+        </section>
+      ))}
 
       {/* Événements et Cérémonies */}
-      <section className="section">
-        <div className="container">
-          <motion.div
-            className="section-header center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <h2>Événements et Cérémonies</h2>
-            <p className="text-soft">
-              Des moments forts qui renforcent notre communauté
-            </p>
-          </motion.div>
+      {events.length > 0 && (
+        <section className="section">
+          <div className="container">
+            <SectionHeader title={page.eventsSection.title} subtitle={page.eventsSection.subtitle} />
 
-          <motion.div
-            className="events-grid mt-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={stagger}
-          >
-            {events.map((event) => (
-              <motion.div key={event.id} className="event-card" variants={fadeUp}>
-                <img src={event.image} alt={event.title} loading="lazy" />
-                <div className="event-info">
-                  <h4>{event.title}</h4>
-                  <p>{event.desc}</p>
-                  {event.photos.length > 0 && (
-                    <button
-                      className="gallery-btn"
-                      onClick={() => openGallery(event)}
-                    >
-                      <Images size={16} />
-                      Galerie ({event.photos.length})
-                    </button>
-                  )}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+            <motion.div
+              className="events-grid mt-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={stagger}
+            >
+              {events.map((event) => <EventCard key={event.id} event={event} />)}
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="cta">
@@ -282,38 +324,13 @@ export default function Actualites() {
         </div>
       </section>
 
-      {/* Gallery Modal */}
-      {galleryOpen && currentEvent && (
-        <div className="gallery-modal" onClick={closeGallery}>
-          <div className="gallery-modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="gallery-close" onClick={closeGallery}>
-              <X size={24} />
-            </button>
-            <div className="gallery-header">
-              <h3>{currentEvent.title}</h3>
-              <span className="gallery-counter">{currentPhoto + 1} / {currentEvent.photos.length}</span>
-            </div>
-            <div className="gallery-main">
-              <button className="gallery-nav gallery-prev" onClick={prevPhoto}>‹</button>
-              <img
-                src={currentEvent.photos[currentPhoto]}
-                alt={`${currentEvent.title} - Photo ${currentPhoto + 1}`}
-              />
-              <button className="gallery-nav gallery-next" onClick={nextPhoto}>›</button>
-            </div>
-            <div className="gallery-thumbs">
-              {currentEvent.photos.map((photo, i) => (
-                <button
-                  key={i}
-                  className={`gallery-thumb ${i === currentPhoto ? 'active' : ''}`}
-                  onClick={() => setCurrentPhoto(i)}
-                >
-                  <img src={photo} alt={`Thumb ${i + 1}`} />
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
+      {viewer && (
+        <PhotoViewer
+          title={viewer.title}
+          photos={viewer.photos}
+          startIndex={viewer.index}
+          onClose={() => setViewer(null)}
+        />
       )}
     </>
   )

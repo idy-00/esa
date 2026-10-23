@@ -9,6 +9,12 @@ lerna-debug.log*
 
 node_modules
 dist
+
+# Données locales du dashboard admin et secrets (jamais commités)
+.local-server
+config-admin.local.php
+config-brevo-UPLOAD-SEPAREMENT.php
+deploy_to_systalink.py
 dist-ssr
 *.local
 

@@ -266,3 +266,31 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* Vignettes cliquables (boutons) */
+.immersion-item,
+.galerie-item {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: var(--gray-100);
+  font: inherit;
+}
+
+/* Albums avec beaucoup de photos : les lignes supplémentaires gardent la même hauteur */
+.immersion-gallery {
+  grid-auto-rows: 200px;
+}
+
+@media (max-width: 1024px) {
+  .immersion-gallery {
+    grid-auto-rows: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .immersion-gallery {
+    grid-auto-rows: 180px;
+  }
+}

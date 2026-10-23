@@ -226,3 +226,24 @@ img { max-width: 100%; height: auto; display: block; }
   outline: 2px solid var(--sky-500);
   outline-offset: 2px;
 }
+
+/* Chargement du contenu dynamique */
+.page-loader {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-loader-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--sky-100);
+  border-top-color: var(--sky-600);
+  border-radius: 50%;
+  animation: page-loader-spin 0.8s linear infinite;
+}
+
+@keyframes page-loader-spin {
+  to { transform: rotate(360deg); }
+}
